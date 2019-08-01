@@ -2,7 +2,7 @@
   <div class="login">
     <div class="title">Elemental Battles - powered by EOSIO VueJs Build</div>
     <div class="description">Please use the Account Name and Private Key generated in the previous page to log into the game.</div>
-    <form name="form">
+    <form name="form" @submit="onSubmit">
       <div class="field">
         <label>Account name</label>
         <input
@@ -25,11 +25,10 @@
         />
       </div>
       <div class="field form-error">
-        <span class="error">{ error }</span>
+        <span class="error">{{ getError }}</span>
       </div>
       <div class="bottom">
-        <Button text='CONFIRM' >
-        </Button>
+        <Button text="CONFIRM"></Button>
       </div>
     </form>
   </div>
@@ -48,16 +47,23 @@ export default {
         loginData: {
           username: '',
           key: ''
-        },
-        error: ''    
+        }      
       }
   },
   props: {
     
   },
   methods: {
-    onSubmit() {
-      alert('on submit');
+    onSubmit(event) {
+      event.preventDefault();
+      console.log('logginning now ...')
+      this.$store.dispatch('login', this.loginData);
+    }
+  },
+   computed: {
+    // a computed getter
+    getError: function () {
+      return this.$store.getters.getError
     }
   }
 }

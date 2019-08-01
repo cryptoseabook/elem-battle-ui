@@ -1,10 +1,11 @@
 import { Api, JsonRpc } from 'eosjs';
 import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'
 
+//5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 // Main action call to blockchain
 async function takeAction(action, dataValue) {
   const privateKey = localStorage.getItem("cardgame_key");
-  const rpc = new JsonRpc(process.env.REACT_APP_EOS_HTTP_ENDPOINT);
+  const rpc = new JsonRpc("http://localhost:8888");
   const signatureProvider = new JsSignatureProvider([privateKey]);
   const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
@@ -12,7 +13,7 @@ async function takeAction(action, dataValue) {
   try {
     const resultWithConfig = await api.transact({
       actions: [{
-        account: process.env.REACT_APP_EOS_CONTRACT_NAME,
+        account: 'elembattle12',
         name: action,
         authorization: [{
           actor: localStorage.getItem("cardgame_account"),

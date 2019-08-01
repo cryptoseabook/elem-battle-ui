@@ -1,9 +1,6 @@
 <template>
   <div>
-      <button
-        class=''
-        onClick={{ this.handleClick }}
-      >{{ text }}</button>
+      <button class="button">{{text}}</button>
   </div>
 </template>
 
@@ -16,18 +13,20 @@ export default {
     }
   },
   props: {
-    
+    text: {
+      type: String,
+      required: true
+    }
   },
   methods: {
-    handleClick() {
-        alert('handle Click');
-    }
+
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 .button {
   position: relative;
   margin: 0 6px;
@@ -64,7 +63,7 @@ export default {
     display: inline-block;
     animation: boadingButton 3s normal infinite; }
 
-@keyframes boadingButton {
+@keyframes loadingButton {
   from {
     background-position: 0% 50%; }
   50% {
